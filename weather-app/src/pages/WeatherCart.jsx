@@ -1,18 +1,22 @@
 import axios from "axios";
 import { useEffect } from "react";
+import { useState } from "react";
+import { weatherThemes } from "./Theme";
 
-export default function WeatherCard({weather,API_KEY,setWeather}) {
+
+export default function WeatherCard({API_KEY,lat,lon}) {
+  const [weather,setWeather] = useState({});
 
   useEffect(()=>{
     const fetchWeather = async () => {
       const reponse = await axios.get(
-        `https://api.openweathermap.org/data/2.5/weather?lat=27&lon=78&appid=${API_KEY}`,
+        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}`,
       );
       //console.log(await reponse.data);
       setWeather(reponse.data);
     };
     fetchWeather();
-  },[setWeather, API_KEY]);
+  },[setWeather, API_KEY,lat,lon]);
 
   console.log(weather);
 
@@ -20,20 +24,23 @@ export default function WeatherCard({weather,API_KEY,setWeather}) {
     return (t-273.15).toFixed(2) ;
   }
 
+  const theme = weather.weather?.[0]?.main ;
+
+
   return (
     <>
-      <div className="weather-card">
+      <div className="weather-card" style={{ background: weatherThemes[theme]?.background }}>
         <div className="weather-card__glow" />
 
-        <div className="weather-card__header">
+        <div className="weather-card__header" style={{ background: `radial-gradient(circle, ${weatherThemes[theme]?.glow} 0%, transparent 70%)` }}>
           <div>
             <h2 className="weather-card__city">
               {weather.name}, {weather.sys?.country}
             </h2>
-            <p className="weather-card__condition">{weather.weather?.description}</p>
+            <p className="weather-card__condition" style={{ color: weatherThemes[theme]?.accent }}>{weather.weather?.[0]?.description}</p>
           </div>
-          {weather.weather?.icon && (
-          <img className="weather-card__icon" src={weather.weather?.icon} alt={weather.weather?.description} />
+          {weather.weather?.[0]?.icon && (
+          <img className="weather-card__icon" src={`https://openweathermap.org/img/wn/${weather.weather?.[0]?.icon}@2x.png`} alt={weather.weather?.[0]?.description} />
         )}
         </div>
 

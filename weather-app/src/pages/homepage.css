@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500&family=JetBrains+Mono:wght@500&display=swap');
+
+.weather-card {
+  position: relative;
+  width: 320px;
+  padding: 28px 26px;
+  border-radius: 24px;
+  background: linear-gradient(160deg, #2b1d12 0%, #3d2616 55%, #4a2a14 100%);
+  color: #fff8f0;
+  font-family: 'Inter', sans-serif;
+  overflow: hidden;
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
+}
+
+.weather-card__glow {
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffb84d 0%, rgba(255, 123, 84, 0.4) 45%, transparent 70%);
+  filter: blur(10px);
+  animation: pulse 6s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 0.9; transform: scale(1.1); }
+}
+
+.weather-card__header {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  z-index: 1;
+}
+
+.weather-card__city {
+  font-family: 'Fraunces', serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  margin: 0;
+}
+
+.weather-card__condition {
+  margin: 4px 0 0;
+  font-size: 0.85rem;
+  color: #e8c9a8;
+  text-transform: capitalize;
+}
+
+.weather-card__icon {
+  width: 48px;
+  height: 48px;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.3));
+}
+
+.weather-card__temp-row {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.weather-card__temp {
+  font-family: 'Fraunces', serif;
+  font-size: 4.5rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.weather-card__feels {
+  font-size: 0.85rem;
+  color: #d8c9b8;
+}
+
+.weather-card__divider {
+  margin: 22px 0 16px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 184, 77, 0.4), transparent);
+}
+
+.weather-card__stats {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  gap: 28px;
+}
+
+.weather-card__stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.weather-card__stat-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #c9b09a;
+}
+
+.weather-card__stat-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.95rem;
+  color: #fff8f0;
+}

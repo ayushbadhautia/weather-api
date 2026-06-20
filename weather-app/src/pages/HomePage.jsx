@@ -1,31 +1,17 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import './homepage.css'
+import WeatherCard from "./WeatherCart";
 
 export default function HomePage() {
   const [weather,setWeather] = useState({});
+
+  const API_KEY = import.meta.env.VITE_api_key;
   
-  useEffect(()=>{
-    const fetchWeather = async () => {
-      const reponse = await axios.get(
-        "https://api.openweathermap.org/data/2.5/weather?lat=27&lon=78&appid=443b76c65f246668b9277acaaa128a2b",
-      );
-      console.log(await reponse.data);
-      setWeather(reponse.data);
-    };
-    fetchWeather();
-  },[]);
+  
 
-
-
-  function formatTemperatureC(t){
-    return (t-273.15).toFixed(2) ;
-  }
+  
 
   return (
-    <>
-      <div>
-        <h1>{formatTemperatureC(weather?.main?.temp)}</h1>
-      </div>
-    </>
+    <WeatherCard weather={weather} API_KEY={API_KEY} setWeather={setWeather} />
   );
 }

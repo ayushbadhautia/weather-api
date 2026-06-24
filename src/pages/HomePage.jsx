@@ -5,10 +5,6 @@ export default function HomePage() {
   
 
   const API_KEY = import.meta.env.VITE_api_key;
-  
-  
-
-  
 
   return (
     <>

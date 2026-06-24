@@ -8,6 +8,7 @@ export default function WeatherCard({API_KEY,lat,lon}) {
   const [weather,setWeather] = useState({});
 
   useEffect(()=>{
+    if(lat === undefined || lon === undefined){return}
     const fetchWeather = async () => {
       const reponse = await axios.get(
         `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}`,
@@ -16,7 +17,7 @@ export default function WeatherCard({API_KEY,lat,lon}) {
       setWeather(reponse.data);
     };
     fetchWeather();
-  },[setWeather, API_KEY,lat,lon]);
+  },[API_KEY,lat,lon]);
 
   console.log(weather);
 
@@ -56,7 +57,7 @@ export default function WeatherCard({API_KEY,lat,lon}) {
         <div className="weather-card__stats">
           <div className="weather-card__stat">
             <span className="weather-card__stat-label">Wind</span>
-            <span className="weather-card__stat-value">{weather.wind?.speed} kph</span>
+            <span className="weather-card__stat-value">{weather.wind?.speed*3.6} kph</span>
           </div>
           <div className="weather-card__stat">
             <span className="weather-card__stat-label">Humidity</span>
